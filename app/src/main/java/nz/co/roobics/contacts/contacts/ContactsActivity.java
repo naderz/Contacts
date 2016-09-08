@@ -1,7 +1,9 @@
-package nz.co.roobics.contacts;
+package nz.co.roobics.contacts.contacts;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import nz.co.roobics.contacts.R;
 
 public class ContactsActivity extends AppCompatActivity {
 

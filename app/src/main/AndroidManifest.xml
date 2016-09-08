@@ -2,13 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="nz.co.roobics.contacts">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
+        android:name=".BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ContactsActivity">
+        <activity android:name=".contacts.ContactsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
