@@ -25,10 +25,4 @@ public class ApplicationModule {
         return mApplication;
     }
 
-    @Provides
-    @Singleton
-    Bus provideBus() {
-        return new Bus();
-    }
-
 }

@@ -39,4 +39,5 @@ dependencies {
     compile "com.google.dagger:dagger:${dagger}"
     provided "javax.annotation:jsr250-api:${jsr250}"
 
+    compile 'com.android.support:support-v4:23.4.0'
 }

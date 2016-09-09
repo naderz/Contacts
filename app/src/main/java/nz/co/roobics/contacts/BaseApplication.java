@@ -28,10 +28,5 @@ public class BaseApplication extends Application {
         return mNetComponent;
     }
 
-//
-//    @Singleton
-//    @Component(modules = ApplicationModule.class)
-//    public interface ApplicationComponent {
-//        //TODO Inject
-//    }
+
 }
