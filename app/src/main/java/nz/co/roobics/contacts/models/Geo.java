@@ -3,7 +3,9 @@ package nz.co.roobics.contacts.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Geo {
+import java.io.Serializable;
+
+public class Geo implements Serializable {
 
     @SerializedName("lat")
     private String mLat;

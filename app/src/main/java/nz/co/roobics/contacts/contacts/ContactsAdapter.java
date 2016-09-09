@@ -16,7 +16,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     private final List<Contact> mContacts = new ArrayList<>();
     private final ListItemListener mListener;
-    private int mLastPosition = -1;
 
     public ContactsAdapter(ListItemListener listener) {
         mListener = listener;

@@ -1,6 +1,7 @@
 package nz.co.roobics.contacts.contacts;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -14,9 +15,11 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import nz.co.roobics.contacts.R;
+import nz.co.roobics.contacts.contacts.details.DetailsActivity;
 import nz.co.roobics.contacts.models.Contact;
 
 public class ContactsFragment extends Fragment implements ContactsContract.View, ContactsAdapter.ListItemListener {
+
 
     private ContactsContract.Presenter mPresenter;
     private ContactsAdapter.ListItemListener mListener;
@@ -41,7 +44,6 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
     }
 
     @Override
@@ -64,11 +66,6 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
     }
 
     @Override
-    public void onContactClicked(Contact contact) {
-        //TODO:
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mListener = this;
@@ -78,6 +75,25 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mPresenter != null) {
+            mPresenter.start();
+        }
+    }
+
+    @Override
+    public void onContactClicked(Contact contact) {
+        if (((MainActivity) getActivity()).isLandSpace()) {
+            ((MainActivity) getActivity()).selectContact(contact);
+        } else {
+            Intent detailsActivityIntent = new Intent(getActivity(), DetailsActivity.class);
+            detailsActivityIntent.putExtra(DetailsActivity.EXTRA_CONTACT, contact);
+            startActivity(detailsActivityIntent);
+        }
     }
 
     @Override

@@ -3,7 +3,9 @@ package nz.co.roobics.contacts.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
 
     @SerializedName("street")
     private String mStreet;

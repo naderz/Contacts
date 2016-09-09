@@ -2,7 +2,6 @@ package nz.co.roobics.contacts.contacts.details;
 
 import dagger.Module;
 import dagger.Provides;
-import nz.co.roobics.contacts.contacts.ContactsContract;
 
 @Module
 public class DetailsPresenterModule {

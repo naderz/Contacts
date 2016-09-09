@@ -2,8 +2,6 @@ package nz.co.roobics.contacts.di;
 
 import android.content.Context;
 
-import com.squareup.otto.Bus;
-
 import javax.inject.Singleton;
 
 import dagger.Module;

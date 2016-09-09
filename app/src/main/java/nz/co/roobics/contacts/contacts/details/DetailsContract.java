@@ -6,17 +6,17 @@ import nz.co.roobics.contacts.models.Contact;
 
 public class DetailsContract {
 
-    interface Presenter extends BasePresenter {
-
+    public interface Presenter extends BasePresenter {
         void dataToPresent(Contact contact);
-
     }
 
-    interface View extends BaseView<Presenter> {
+    public interface View extends BaseView<Presenter> {
 
-        void showDetails(Contact contact);
+        void updateDetails(Contact contact);
 
-        void showEmpty();
+        void showNoContentView();
+
+        void hideNoContentView();
 
     }
 }

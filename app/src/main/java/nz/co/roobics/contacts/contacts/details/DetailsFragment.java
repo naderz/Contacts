@@ -11,38 +11,47 @@ import nz.co.roobics.contacts.R;
 import nz.co.roobics.contacts.models.Contact;
 
 public class DetailsFragment extends Fragment implements DetailsContract.View {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
+    private static final String EXTRA_CONTACT = "CONTACT";
 
     private DetailsContract.Presenter mPresenter;
     private TextView mUsernameTextView;
     private TextView mPhoneTextView;
     private TextView mAddressTextView;
     private TextView mWebsiteTextView;
+    private View mDetailsContainerView;
+    private View mEmptyView;
+
+    private Contact mContact;
 
     public DetailsFragment() {
         // Required empty public constructor
     }
 
-    public static DetailsFragment newInstance(String param1, String param2) {
+    public static DetailsFragment newInstance(Contact contact) {
         DetailsFragment fragment = new DetailsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(EXTRA_CONTACT, contact);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public static DetailsFragment newInstance() {
+        return new DetailsFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mContact = (Contact) getArguments().getSerializable(EXTRA_CONTACT);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState = new Bundle();
+        outState.putSerializable(EXTRA_CONTACT, mContact);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -54,11 +63,20 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
         mPhoneTextView = (TextView) view.findViewById(R.id.tv_details_phone);
         mAddressTextView = (TextView) view.findViewById(R.id.tv_details_address);
         mWebsiteTextView = (TextView) view.findViewById(R.id.tv_details_website);
+        mDetailsContainerView = view.findViewById(R.id.ll_details_content);
+        mEmptyView = view.findViewById(R.id.view_details_empty);
+
         return view;
     }
 
     @Override
-    public void showDetails(Contact contact) {
+    public void onResume() {
+        super.onResume();
+        mPresenter.dataToPresent(mContact);
+    }
+
+    @Override
+    public void updateDetails(Contact contact) {
         mUsernameTextView.setText(contact.getUsername());
         mPhoneTextView.setText(contact.getPhone());
         mAddressTextView.setText(contact.getAddress().getCity()); //TODO Make the address look right
@@ -66,9 +84,15 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
     }
 
     @Override
-    public void showEmpty() {
-        //TODO Remove the view if there is no data to show
-        //TODO This scenario will only happen when we start the activity on landscape
+    public void showNoContentView() {
+        mDetailsContainerView.setVisibility(View.GONE);
+        mEmptyView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideNoContentView() {
+        mDetailsContainerView.setVisibility(View.VISIBLE);
+        mEmptyView.setVisibility(View.GONE);
     }
 
     @Override
@@ -79,6 +103,8 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
     @Override
     public void onStart() {
         super.onStart();
-        mPresenter.start();
+        if (mPresenter != null) {
+            mPresenter.start();
+        }
     }
 }

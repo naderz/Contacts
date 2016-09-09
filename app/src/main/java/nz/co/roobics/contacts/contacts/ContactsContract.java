@@ -11,8 +11,6 @@ public class ContactsContract {
     interface Presenter extends BasePresenter {
 
         void loadContacts();
-
-        void contactSelected(Contact contact);
     }
 
     interface View extends BaseView<Presenter> {

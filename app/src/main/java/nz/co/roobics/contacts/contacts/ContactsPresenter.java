@@ -1,16 +1,21 @@
 package nz.co.roobics.contacts.contacts;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import nz.co.roobics.contacts.contacts.services.ContactsApi;
 import nz.co.roobics.contacts.models.Contact;
 
-public class ContactsPresenter implements ContactsContract.Presenter {
+public class ContactsPresenter implements ContactsContract.Presenter, ContactsApi.ContactsResponse {
 
-    ContactsContract.View mView;
+    private ContactsContract.View mView;
+    private ContactsApi mContactsApi;
 
     @Inject
-    public ContactsPresenter(ContactsContract.View view) {
+    public ContactsPresenter(ContactsContract.View view, ContactsApi contactsApi) {
         mView = view;
+        mContactsApi = contactsApi;
     }
 
     @Inject
@@ -21,16 +26,23 @@ public class ContactsPresenter implements ContactsContract.Presenter {
     @Override
     public void loadContacts() {
         mView.showLoading();
-        //TODO: Repository call get Contacts
-    }
-
-    @Override
-    public void contactSelected(Contact contact) {
-        //TODO dont think we need this
+        mContactsApi.getContacts(this);
     }
 
     @Override
     public void start() {
         loadContacts();
+    }
+
+    @Override
+    public void onSuccess(List<Contact> contacts) {
+        mView.hideLoading();
+        mView.showContacts(contacts);
+    }
+
+    @Override
+    public void onFailure() {
+        mView.hideLoading();
+        mView.showError("");
     }
 }

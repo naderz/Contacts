@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion "24.0.0"
 
     defaultConfig {
         applicationId "nz.co.roobics.contacts"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }
@@ -39,5 +39,4 @@ dependencies {
     compile "com.google.dagger:dagger:${dagger}"
     provided "javax.annotation:jsr250-api:${jsr250}"
 
-    compile 'com.android.support:support-v4:23.4.0'
 }
