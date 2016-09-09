@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Contacts</string>
+
+    <string name="action_sort_dec">Sort By Z-A</string>
+    <string name="action_sort_acc">Sort By A-Z</string>
+    <string name="no_data_available">No contacts found.</string>
+    <string name="details_username">UserName</string>
+    <string name="details_website">Website</string>
+    <string name="details_address">Address</string>
+    <string name="details_phone">Phone</string>
+
 </resources>

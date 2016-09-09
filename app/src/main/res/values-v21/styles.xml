@@ -1,0 +1,8 @@
+<resources>
+
+    <!-- >=21 specific attributes edited here -->
+    <style name="AppTheme" parent="ParentTheme">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+</resources>

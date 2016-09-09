@@ -3,9 +3,9 @@ package nz.co.roobics.contacts;
 import android.app.Application;
 
 import nz.co.roobics.contacts.di.ApplicationModule;
+import nz.co.roobics.contacts.di.DaggerNetComponent;
 import nz.co.roobics.contacts.di.NetComponent;
 import nz.co.roobics.contacts.di.NetModule;
-import nz.co.roobics.contacts.di.components.DaggerNetComponent;
 
 public class BaseApplication extends Application {
 
