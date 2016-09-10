@@ -1,9 +1,8 @@
 package nz.co.roobics.contacts.contacts;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,17 +24,20 @@ import nz.co.roobics.contacts.contacts.details.DetailsActivity;
 import nz.co.roobics.contacts.models.Contact;
 
 public class ContactsFragment extends Fragment implements ContactsContract.View, ContactsAdapter.ListItemListener {
+    private static final String EXTRA_CONTACTS = "CONTACTS";
+    private static final String EXTRA_VIEW_STATE = "VIEW_STATE";
 
     @Inject
     ContactsPresenter mPresenter;
 
-    private ContactsAdapter.ListItemListener mListener;
-
-    private List<Contact> mContacts;
+    private ArrayList<Contact> mContacts; //I need the Serializable type so cant be List
     private ContactsAdapter mAdapter;
+
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    private View mEmptyView;
+    private TextView mInfoTextView;
+
+    private ContactsViewState mViewState;
 
     public ContactsFragment() {
         // Required empty public constructor
@@ -45,12 +50,33 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
         return fragment;
     }
 
+    public void sortAcc() {
+        mAdapter.sortAcc();
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    public void sortDec() {
+        mAdapter.sortDec();
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+        mAdapter = new ContactsAdapter(this);
+
         DaggerContactsComponent.builder().netComponent(((BaseApplication) getActivity().getApplication()).getNetComponent())
                 .contactsPresenterModule(new ContactsPresenterModule(this))
                 .build().inject(this);
+
+        if (savedInstanceState != null) {
+            mViewState = (ContactsViewState) savedInstanceState.getSerializable(EXTRA_VIEW_STATE);
+            assert mViewState != null;
+            mContacts = mViewState.getContacts();
+        } else {
+            mViewState = new ContactsViewState();
+        }
     }
 
     @Override
@@ -58,42 +84,40 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
         View view = inflater.inflate(R.layout.fragment_contacts_list, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list_contacts);
-        mEmptyView = view.findViewById(R.id.view_empty);
+        mInfoTextView = (TextView) view.findViewById(R.id.tv_info);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                mViewState.setShowingLoading(true);
                 mPresenter.loadContacts();
             }
         });
-
+        mRecyclerView.setAdapter(mAdapter);
         return view;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mListener = this;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        showLoading(mViewState.isShowingLoading());
         if (mPresenter != null) {
-            mPresenter.start();
+            mPresenter.start(mContacts);
         }
     }
 
     @Override
-    public void onContactClicked(Contact contact) {
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mViewState.setContacts(mContacts);
+        outState.putSerializable(EXTRA_VIEW_STATE, mViewState);
+    }
+
+    @Override
+    public void onContactClicked(Contact contact, int position) {
+        mViewState.setSelectedItem(position);
         if (((MainActivity) getActivity()).isLandSpace()) {
             ((MainActivity) getActivity()).selectContact(contact);
         } else {
@@ -104,47 +128,42 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
     }
 
     @Override
-    public void showContacts(List<Contact> contacts) {
+    public void showContacts(@NonNull List<Contact> contacts) {
         if (getView() != null) {
-            mContacts = contacts;
-            if (mContacts == null || mContacts.isEmpty()) {
-                mEmptyView.setVisibility(View.VISIBLE);
-                mAdapter = new ContactsAdapter(mListener);
-            } else {
-                mEmptyView.setVisibility(View.GONE);
-                if (mAdapter == null) {
-                    mAdapter = new ContactsAdapter(this, mContacts);
-                } else {
-                    mAdapter.updateData(mContacts);
-                }
-            }
-            mRecyclerView.setAdapter(mAdapter);
+            mContacts = (ArrayList<Contact>) contacts;
+            mInfoTextView.setVisibility(View.GONE);
+            mAdapter.updateData(mContacts);
+            selectItemIfLandscape();
+        }
+    }
+
+    private void selectItemIfLandscape() {
+        MainActivity activity = (MainActivity) getActivity();
+        if (activity.isLandSpace()) {
+            activity.selectContact(mAdapter.getContacts().get(mViewState.getSelectedItem()));
         }
     }
 
     @Override
-    public void showError(String errorMessage) {
-        mEmptyView.setVisibility(View.VISIBLE);
-        //TODO: Show a snack here ?
+    public void showNoContent() {
+        if (mAdapter.getItemCount() == 0) {
+            mInfoTextView.setVisibility(View.VISIBLE);
+            mInfoTextView.setText(getString(R.string.no_contacts));
+        }
     }
 
     @Override
-    public void showLoading() {
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(true);
-            }
-        });
-
+    public void showError() {
+        Toast.makeText(getActivity(), "Connection error", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void hideLoading() {
-        new Handler().post(new Runnable() {
+    public void showLoading(final boolean showLoading) {
+        mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
-                mSwipeRefreshLayout.setRefreshing(false);
+                mViewState.setShowingLoading(showLoading);
+                mSwipeRefreshLayout.setRefreshing(showLoading);
             }
         });
     }

@@ -50,7 +50,6 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         DaggerDetailsComponent.builder()
                 .detailsPresenterModule(new DetailsPresenterModule(this)).build()
                 .inject(this);
@@ -90,9 +89,10 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
 
     @Override
     public void updateDetails(Contact contact) {
+        mContact = contact;
         mUsernameTextView.setText(contact.getUsername());
         mPhoneTextView.setText(contact.getPhone());
-        mAddressTextView.setText(contact.getAddress().getCity()); //TODO Make the address look right
+        mAddressTextView.setText(contact.getAddress().getCity());
         mWebsiteTextView.setText(contact.getWebsite());
     }
 

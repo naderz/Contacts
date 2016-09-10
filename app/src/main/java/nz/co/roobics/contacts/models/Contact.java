@@ -1,11 +1,13 @@
 
 package nz.co.roobics.contacts.models;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Contact implements Serializable {
+public class Contact implements Serializable, Comparable<Contact> {
 
     @SerializedName("id")
     private Integer mId;
@@ -86,6 +88,11 @@ public class Contact implements Serializable {
 
     public void setCompany(Company company) {
         this.mCompany = company;
+    }
+
+    @Override
+    public int compareTo(@NonNull Contact contact) {
+        return getName().compareTo(contact.getName());
     }
 
 }

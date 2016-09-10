@@ -10,7 +10,7 @@ public class DetailsContract {
         void dataToPresent(Contact contact);
     }
 
-    public interface View extends BaseView<Presenter> {
+    public interface View extends BaseView {
 
         void updateDetails(Contact contact);
 

@@ -1,15 +1,17 @@
 <resources>
+    <!--Shared -->
     <string name="app_name">Contacts</string>
+    <string name="loading">Loading…</string>
 
+    <!--Main -->
     <string name="action_sort_dec">Sort By Z-A</string>
     <string name="action_sort_acc">Sort By A-Z</string>
-    <string name="no_data_available">No contacts found.</string>
+    <string name="no_contacts">No contacts found.</string>
+
+    <!--Details -->
     <string name="details_username">UserName</string>
     <string name="details_website">Website</string>
     <string name="details_address">Address</string>
     <string name="details_phone">Phone</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

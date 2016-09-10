@@ -1,5 +1,7 @@
 package nz.co.roobics.contacts.contacts;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 import nz.co.roobics.contacts.BasePresenter;
@@ -11,17 +13,19 @@ public class ContactsContract {
     interface Presenter extends BasePresenter {
 
         void loadContacts();
+
+        void start(List<Contact> contacts);
     }
 
-    interface View extends BaseView<Presenter> {
+    interface View extends BaseView {
 
-        void showContacts(List<Contact> contacts);
+        void showContacts(@NonNull List<Contact> contacts);
 
-        void showError(String errorMessage);
+        void showNoContent();
 
-        void showLoading();
+        void showError();
 
-        void hideLoading();
+        void showLoading(boolean showLoading);
 
     }
 }

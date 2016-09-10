@@ -19,33 +19,18 @@
             android:clipToPadding="false"
             android:paddingTop="@dimen/spacing_micro"
             app:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/list_item_contact" />
+            tools:listitem="@layout/list_item_contact"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <LinearLayout
-        android:id="@+id/view_empty"
+    <TextView
+        android:id="@+id/tv_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:clickable="false"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="gone">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/spacing_huge"
-            android:layout_marginLeft="@dimen/spacing_huge"
-            android:layout_marginRight="@dimen/spacing_huge"
-            android:layout_marginStart="@dimen/spacing_huge"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:gravity="center"
-            android:text="@string/no_data_available"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-    </LinearLayout>
+        android:layout_margin="@dimen/spacing_huge"
+        android:gravity="center"
+        android:text="@string/loading"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
 </RelativeLayout>

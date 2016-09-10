@@ -25,6 +25,6 @@ public class DetailsPresenter implements DetailsContract.Presenter {
 
     @Override
     public void start() {
-
+        //Nothing to do here
     }
 }

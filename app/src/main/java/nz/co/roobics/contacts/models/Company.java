@@ -1,11 +1,13 @@
 
 package nz.co.roobics.contacts.models;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Company implements Serializable {
+public class Company implements Serializable{
 
     @SerializedName("name")
     private String mName;
@@ -37,5 +39,6 @@ public class Company implements Serializable {
     public void setBs(String bs) {
         this.mBs = bs;
     }
+
 
 }

@@ -18,26 +18,44 @@ public class ContactsPresenter implements ContactsContract.Presenter, ContactsAp
         mContactsApi = contactsApi;
     }
 
+    public void setView(ContactsContract.View view) {
+        mView = view;
+    }
+
     @Override
     public void loadContacts() {
-        mView.showLoading();
+        mView.showLoading(true);
         mContactsApi.getContacts(this);
     }
 
     @Override
+    public void start(List<Contact> contacts) {
+        if (contacts != null) {
+            mView.showContacts(contacts);
+        } else {
+            loadContacts();
+        }
+    }
+
+    @Override
     public void start() {
-        loadContacts();
+        //Nothing to do here
     }
 
     @Override
     public void onSuccess(List<Contact> contacts) {
-        mView.hideLoading();
-        mView.showContacts(contacts);
+        mView.showLoading(false);
+        if (contacts == null || contacts.isEmpty()) {
+            mView.showNoContent();
+        } else {
+            mView.showContacts(contacts);
+        }
     }
 
     @Override
     public void onFailure() {
-        mView.hideLoading();
-        mView.showError("");
+        mView.showLoading(false);
+        mView.showError();
+        mView.showNoContent();
     }
 }

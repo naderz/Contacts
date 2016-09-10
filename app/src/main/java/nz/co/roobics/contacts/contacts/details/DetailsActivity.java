@@ -2,6 +2,8 @@ package nz.co.roobics.contacts.contacts.details;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import nz.co.roobics.contacts.FragmentUtils;
 import nz.co.roobics.contacts.R;
@@ -20,7 +22,25 @@ public class DetailsActivity extends AppCompatActivity {
         mIsLandSpace = findViewById(R.id.fragment_details_container) != null;
 
         Contact contact = (Contact) getIntent().getSerializableExtra(EXTRA_CONTACT);
+        setupToolbar(contact.getName());
         initDetailsFragment(contact);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    private void setupToolbar(String title) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle(title);
     }
 
     private DetailsFragment initDetailsFragment(Contact contact) {
