@@ -24,6 +24,7 @@ import nz.co.roobics.contacts.contacts.details.DetailsActivity;
 import nz.co.roobics.contacts.models.Contact;
 
 public class ContactsFragment extends Fragment implements ContactsContract.View, ContactsAdapter.ListItemListener {
+
     private static final String EXTRA_VIEW_STATE = "VIEW_STATE";
 
     @Inject
@@ -74,13 +75,7 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contacts_list, container, false);
-        if (savedInstanceState != null) {
-            mViewState = (ContactsViewState) savedInstanceState.getSerializable(EXTRA_VIEW_STATE);
-            assert mViewState != null;
-            mContacts = mViewState.getContacts();
-        } else {
-            mViewState = new ContactsViewState();
-        }
+        restoreFromViewState(savedInstanceState);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list_contacts);
         mInfoTextView = (TextView) view.findViewById(R.id.tv_info);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -95,6 +90,16 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
         });
         mRecyclerView.setAdapter(mAdapter);
         return view;
+    }
+
+    private void restoreFromViewState(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            mViewState = (ContactsViewState) savedInstanceState.getSerializable(EXTRA_VIEW_STATE);
+            assert mViewState != null;
+            mContacts = mViewState.getContacts();
+        } else {
+            mViewState = new ContactsViewState();
+        }
     }
 
     @Override
@@ -152,7 +157,7 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
 
     @Override
     public void showError() {
-        Toast.makeText(getActivity(), "Connection error", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), R.string.cnx_error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

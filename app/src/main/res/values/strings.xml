@@ -2,6 +2,7 @@
     <!--Shared -->
     <string name="app_name">Contacts</string>
     <string name="loading">Loading…</string>
+    <string name="cnx_error">Connection error</string>
 
     <!--Main -->
     <string name="action_sort_dec">Sort By Z-A</string>
