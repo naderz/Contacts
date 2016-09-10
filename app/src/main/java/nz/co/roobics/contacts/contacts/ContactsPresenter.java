@@ -31,7 +31,11 @@ public class ContactsPresenter implements ContactsContract.Presenter, ContactsAp
     @Override
     public void start(List<Contact> contacts) {
         if (contacts != null) {
-            mView.showContacts(contacts);
+            if (contacts.isEmpty()) {
+                mView.showNoContent();
+            } else {
+                mView.showContacts(contacts);
+            }
         } else {
             loadContacts();
         }

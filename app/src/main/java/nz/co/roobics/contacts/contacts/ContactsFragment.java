@@ -138,13 +138,14 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
 
     private void selectItemIfLandscape() {
         MainActivity activity = (MainActivity) getActivity();
-        if (activity.isLandSpace()) {
+        if (activity.isLandSpace() && !mContacts.isEmpty()) {
             activity.selectContact(mAdapter.getContacts().get(mViewState.getSelectedItem()));
         }
     }
 
     @Override
     public void showNoContent() {
+        mContacts = new ArrayList<>();
         if (mAdapter.getItemCount() == 0) {
             mInfoTextView.setVisibility(View.VISIBLE);
             mInfoTextView.setText(getString(R.string.no_contacts));
