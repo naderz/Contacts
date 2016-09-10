@@ -19,7 +19,7 @@ public class ContactsApiModule {
     }
 
     @Provides
-    @FragmentScoped // needs to be consistent with the component scope
+    @FragmentScoped
     public ContactsApi providesContactsApi(Retrofit retrofit) {
         return new ContactsApi(retrofit);
     }

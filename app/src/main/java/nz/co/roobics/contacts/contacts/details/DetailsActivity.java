@@ -60,6 +60,5 @@ public class DetailsActivity extends AppCompatActivity {
         if (!mIsLandSpace) {
             finish();
         }
-
     }
 }

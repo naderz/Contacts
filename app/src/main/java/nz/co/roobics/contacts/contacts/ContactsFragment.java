@@ -69,6 +69,11 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
                 .contactsPresenterModule(new ContactsPresenterModule(this))
                 .build().inject(this);
 
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_contacts_list, container, false);
         if (savedInstanceState != null) {
             mViewState = (ContactsViewState) savedInstanceState.getSerializable(EXTRA_VIEW_STATE);
             assert mViewState != null;
@@ -76,12 +81,6 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
         } else {
             mViewState = new ContactsViewState();
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contacts_list, container, false);
-
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list_contacts);
         mInfoTextView = (TextView) view.findViewById(R.id.tv_info);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -129,9 +128,9 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
     @Override
     public void showContacts(@NonNull List<Contact> contacts) {
         if (getView() != null) {
-            mContacts = (ArrayList<Contact>) contacts;
             mInfoTextView.setVisibility(View.GONE);
-            mAdapter.updateData(mContacts);
+            mAdapter.updateData(contacts);
+            mContacts = (ArrayList<Contact>) mAdapter.getContacts();
             selectItemIfLandscape();
         }
     }

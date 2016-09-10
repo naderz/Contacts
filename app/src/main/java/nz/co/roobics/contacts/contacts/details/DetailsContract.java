@@ -7,7 +7,9 @@ import nz.co.roobics.contacts.models.Contact;
 public class DetailsContract {
 
     public interface Presenter extends BasePresenter {
+
         void dataToPresent(Contact contact);
+
     }
 
     public interface View extends BaseView {

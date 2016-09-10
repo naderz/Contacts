@@ -13,6 +13,7 @@ import nz.co.roobics.contacts.R;
 import nz.co.roobics.contacts.models.Contact;
 
 public class DetailsFragment extends Fragment implements DetailsContract.View {
+
     private static final String EXTRA_CONTACT = "CONTACT";
 
     @Inject

@@ -1,7 +1,6 @@
 package nz.co.roobics.contacts.contacts.services;
 
 import android.os.Handler;
-import android.util.Log;
 
 import java.util.List;
 
@@ -26,7 +25,8 @@ public class ContactsApi {
         mRetrofit.create(ContactsApiModule.ContactsServices.class).getContacts().enqueue(new Callback<List<Contact>>() {
             @Override
             public void onResponse(Call<List<Contact>> call, final Response<List<Contact>> response) {
-                new Handler().postDelayed(new Runnable() { //FIXME: !!!!!Remove this is just for testing!!!!!
+                //FIXME: !!!!!Remove this is just for testing!!!!!
+                new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         contactsResponse.onSuccess(response.body());

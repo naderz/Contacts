@@ -9,8 +9,6 @@ public class ContactsViewState extends ViewState {
 
     private int mSelectedItem = 0;
 
-    private boolean mCurrentOrderAcc = true;
-
     private ArrayList<Contact> mContacts;
 
     public ArrayList<Contact> getContacts() {
@@ -29,11 +27,4 @@ public class ContactsViewState extends ViewState {
         this.mSelectedItem = mSelectedItem;
     }
 
-    public boolean ismCurrentOrderAcc() {
-        return mCurrentOrderAcc;
-    }
-
-    public void setmCurrentOrderAcc(boolean mCurrentOrderAcc) {
-        this.mCurrentOrderAcc = mCurrentOrderAcc;
-    }
 }

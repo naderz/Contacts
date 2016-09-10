@@ -16,18 +16,16 @@ import nz.co.roobics.contacts.models.Contact;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
 
-    private final List<Contact> mContacts = new ArrayList<>();
-    private final ListItemListener mListener;
-    private int mSelectedItem = 0;
+    private List<Contact> mContacts;
+    private ListItemListener mListener;
 
     public ContactsAdapter(ListItemListener listener) {
         mListener = listener;
+        mContacts = new ArrayList<>();
     }
 
     public void updateData(List<Contact> contacts) {
-        mContacts.clear();
-        mContacts.addAll(contacts);
-        sortAcc();
+        mContacts = contacts;
     }
 
     public void sortAcc() {
@@ -60,7 +58,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    mSelectedItem = holder.getAdapterPosition();
                     mListener.onContactClicked(holder.contact, holder.getAdapterPosition());
                 }
             }
@@ -88,7 +85,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     }
 
     public interface ListItemListener {
-
         void onContactClicked(Contact contact, int position);
     }
 }
