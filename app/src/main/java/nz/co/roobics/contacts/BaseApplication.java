@@ -20,7 +20,6 @@ public class BaseApplication extends Application {
         mNetComponent = DaggerNetComponent.builder()
                 .netModule(new NetModule("http://jsonplaceholder.typicode.com/"))
                 .build();
-
     }
 
     public NetComponent getNetComponent() {
