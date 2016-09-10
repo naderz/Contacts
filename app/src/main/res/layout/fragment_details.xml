@@ -2,8 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -103,8 +102,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_margin="@dimen/spacing_large"
-            android:text="@string/no_contacts"
+            android:gravity="center"
+            android:layout_margin="@dimen/spacing_huge"
+            android:text="@string/no_contact_details"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:visibility="gone"/>
 

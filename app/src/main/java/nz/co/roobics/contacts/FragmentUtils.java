@@ -4,7 +4,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-public class FragmentUtils {
+public final class FragmentUtils {
+
+    private FragmentUtils() {
+        //No one can instantiate this
+    }
 
     public static void addFragmentToActivity(FragmentManager fragmentManager,
                                              Fragment fragment, int frameId) {

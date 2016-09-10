@@ -30,11 +30,18 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     public void sortAcc() {
         Collections.sort(mContacts);
+        animateAllItems();
     }
 
     public void sortDec() {
         Comparator decComparator = Collections.reverseOrder();
         Collections.sort(mContacts, decComparator);
+        animateAllItems();
+    }
+
+    private void animateAllItems() {
+        notifyItemRangeRemoved(0, getItemCount());
+        notifyItemRangeInserted(0, getItemCount());
     }
 
     public List<Contact> getContacts() {

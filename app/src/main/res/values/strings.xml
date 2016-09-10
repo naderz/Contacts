@@ -14,5 +14,6 @@
     <string name="details_website">Website</string>
     <string name="details_address">Address</string>
     <string name="details_phone">Phone</string>
+    <string name="no_contact_details">Nothing to show here.</string>
 
 </resources>

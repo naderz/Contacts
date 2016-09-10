@@ -54,10 +54,6 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
         DaggerDetailsComponent.builder()
                 .detailsPresenterModule(new DetailsPresenterModule(this)).build()
                 .inject(this);
-
-        if (getArguments() != null) {
-            mContact = (Contact) getArguments().getSerializable(EXTRA_CONTACT);
-        }
     }
 
     @Override
@@ -79,13 +75,18 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
         mDetailsContainerView = view.findViewById(R.id.ll_details_content);
         mEmptyView = view.findViewById(R.id.view_details_empty);
 
+        if (getArguments() != null) {
+            mContact = (Contact) getArguments().getSerializable(EXTRA_CONTACT);
+        }
         return view;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mPresenter.dataToPresent(mContact);
+    public void onStart() {
+        super.onStart();
+        if (mPresenter != null) {
+            mPresenter.dataToPresent(mContact);
+        }
     }
 
     @Override
@@ -109,11 +110,4 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
         mEmptyView.setVisibility(View.GONE);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (mPresenter != null) {
-            mPresenter.start();
-        }
-    }
 }

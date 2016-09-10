@@ -52,12 +52,10 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
 
     public void sortAcc() {
         mAdapter.sortAcc();
-        mRecyclerView.setAdapter(mAdapter);
     }
 
     public void sortDec() {
         mAdapter.sortDec();
-        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
