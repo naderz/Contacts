@@ -24,7 +24,6 @@ import nz.co.roobics.contacts.contacts.details.DetailsActivity;
 import nz.co.roobics.contacts.models.Contact;
 
 public class ContactsFragment extends Fragment implements ContactsContract.View, ContactsAdapter.ListItemListener {
-    private static final String EXTRA_CONTACTS = "CONTACTS";
     private static final String EXTRA_VIEW_STATE = "VIEW_STATE";
 
     @Inject
