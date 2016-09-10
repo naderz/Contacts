@@ -14,14 +14,18 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import nz.co.roobics.contacts.BaseApplication;
 import nz.co.roobics.contacts.R;
 import nz.co.roobics.contacts.contacts.details.DetailsActivity;
 import nz.co.roobics.contacts.models.Contact;
 
 public class ContactsFragment extends Fragment implements ContactsContract.View, ContactsAdapter.ListItemListener {
 
+    @Inject
+    ContactsPresenter mPresenter;
 
-    private ContactsContract.Presenter mPresenter;
     private ContactsAdapter.ListItemListener mListener;
 
     private List<Contact> mContacts;
@@ -44,6 +48,9 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DaggerContactsComponent.builder().netComponent(((BaseApplication) getActivity().getApplication()).getNetComponent())
+                .contactsPresenterModule(new ContactsPresenterModule(this))
+                .build().inject(this);
     }
 
     @Override
@@ -142,8 +149,4 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
         });
     }
 
-    @Override
-    public void setPresenter(ContactsContract.Presenter presenter) {
-        mPresenter = presenter;
-    }
 }

@@ -18,11 +18,6 @@ public class ContactsPresenter implements ContactsContract.Presenter, ContactsAp
         mContactsApi = contactsApi;
     }
 
-    @Inject
-    void setupListeners() {
-        mView.setPresenter(this);
-    }
-
     @Override
     public void loadContacts() {
         mView.showLoading();

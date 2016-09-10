@@ -18,6 +18,4 @@ package nz.co.roobics.contacts;
 
 public interface BaseView<T> {
 
-    void setPresenter(T presenter);
-
 }

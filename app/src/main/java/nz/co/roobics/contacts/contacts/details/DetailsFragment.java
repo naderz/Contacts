@@ -7,13 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
 import nz.co.roobics.contacts.R;
 import nz.co.roobics.contacts.models.Contact;
 
 public class DetailsFragment extends Fragment implements DetailsContract.View {
     private static final String EXTRA_CONTACT = "CONTACT";
 
-    private DetailsContract.Presenter mPresenter;
+    @Inject
+    DetailsPresenter mPresenter;
+
     private TextView mUsernameTextView;
     private TextView mPhoneTextView;
     private TextView mAddressTextView;
@@ -39,9 +43,18 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
         return new DetailsFragment();
     }
 
+    public DetailsContract.Presenter getPresenter() {
+        return mPresenter;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        DaggerDetailsComponent.builder()
+                .detailsPresenterModule(new DetailsPresenterModule(this)).build()
+                .inject(this);
+
         if (getArguments() != null) {
             mContact = (Contact) getArguments().getSerializable(EXTRA_CONTACT);
         }
@@ -93,11 +106,6 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
     public void hideNoContentView() {
         mDetailsContainerView.setVisibility(View.VISIBLE);
         mEmptyView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void setPresenter(DetailsContract.Presenter presenter) {
-        mPresenter = presenter;
     }
 
     @Override

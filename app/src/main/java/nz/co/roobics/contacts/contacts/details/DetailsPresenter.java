@@ -13,11 +13,6 @@ public class DetailsPresenter implements DetailsContract.Presenter {
         mView = view;
     }
 
-    @Inject
-    void setupListeners() {
-        mView.setPresenter(this);
-    }
-
     @Override
     public void dataToPresent(Contact contact) {
         if (contact != null) {

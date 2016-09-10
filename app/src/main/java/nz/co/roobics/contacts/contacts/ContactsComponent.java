@@ -9,5 +9,5 @@ import nz.co.roobics.contacts.di.NetComponent;
 @Component(dependencies = NetComponent.class, modules = {ContactsPresenterModule.class, ContactsApiModule.class})
 public interface ContactsComponent {
 
-    void inject(MainActivity activity);
+    void inject(ContactsFragment fragment);
 }
