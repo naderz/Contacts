@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 
 public class ContactsApi {
 
-    private Retrofit mRetrofit;
+    private final Retrofit mRetrofit;
 
     @Inject
     public ContactsApi(Retrofit retrofit) {

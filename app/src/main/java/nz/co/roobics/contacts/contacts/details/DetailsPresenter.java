@@ -6,7 +6,7 @@ import nz.co.roobics.contacts.contacts.models.Contact;
 
 public class DetailsPresenter implements DetailsContract.Presenter {
 
-    private DetailsContract.View mView;
+    private final DetailsContract.View mView;
 
     @Inject
     public DetailsPresenter(DetailsContract.View view) {
@@ -23,8 +23,4 @@ public class DetailsPresenter implements DetailsContract.Presenter {
         }
     }
 
-    @Override
-    public void start() {
-        //Nothing to do here
-    }
 }

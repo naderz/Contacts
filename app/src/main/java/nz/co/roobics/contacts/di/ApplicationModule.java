@@ -11,7 +11,7 @@ import nz.co.roobics.contacts.BaseApplication;
 @Module
 public class ApplicationModule {
 
-    private BaseApplication mApplication;
+    private final BaseApplication mApplication;
 
     public ApplicationModule(BaseApplication application) {
         mApplication = application;

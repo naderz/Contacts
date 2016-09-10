@@ -17,7 +17,7 @@ import nz.co.roobics.contacts.contacts.models.Contact;
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
 
     private List<Contact> mContacts;
-    private ListItemListener mListener;
+    private final ListItemListener mListener;
 
     public ContactsAdapter(ListItemListener listener) {
         mListener = listener;
@@ -33,6 +33,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         animateAllItems();
     }
 
+    @SuppressWarnings("unchecked")
     public void sortDec() {
         Comparator decComparator = Collections.reverseOrder();
         Collections.sort(mContacts, decComparator);

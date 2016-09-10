@@ -42,11 +42,6 @@ public class ContactsPresenter implements ContactsContract.Presenter, ContactsAp
     }
 
     @Override
-    public void start() {
-        //Nothing to do here
-    }
-
-    @Override
     public void onSuccess(List<Contact> contacts) {
         mView.showLoading(false);
         if (contacts == null || contacts.isEmpty()) {
