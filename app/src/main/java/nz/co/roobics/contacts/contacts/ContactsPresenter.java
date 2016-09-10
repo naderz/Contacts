@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import nz.co.roobics.contacts.contacts.services.ContactsApi;
-import nz.co.roobics.contacts.models.Contact;
+import nz.co.roobics.contacts.contacts.models.Contact;
 
 public class ContactsPresenter implements ContactsContract.Presenter, ContactsApi.ContactsResponse {
 

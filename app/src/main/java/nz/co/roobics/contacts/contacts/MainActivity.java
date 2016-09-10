@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import nz.co.roobics.contacts.FragmentUtils;
 import nz.co.roobics.contacts.R;
 import nz.co.roobics.contacts.contacts.details.DetailsFragment;
-import nz.co.roobics.contacts.models.Contact;
+import nz.co.roobics.contacts.contacts.models.Contact;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -2,7 +2,7 @@ package nz.co.roobics.contacts.contacts.details;
 
 import nz.co.roobics.contacts.BasePresenter;
 import nz.co.roobics.contacts.BaseView;
-import nz.co.roobics.contacts.models.Contact;
+import nz.co.roobics.contacts.contacts.models.Contact;
 
 public class DetailsContract {
 

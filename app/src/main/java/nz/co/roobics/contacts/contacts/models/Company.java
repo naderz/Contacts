@@ -1,7 +1,5 @@
 
-package nz.co.roobics.contacts.models;
-
-import android.support.annotation.NonNull;
+package nz.co.roobics.contacts.contacts.models;
 
 import com.google.gson.annotations.SerializedName;
 

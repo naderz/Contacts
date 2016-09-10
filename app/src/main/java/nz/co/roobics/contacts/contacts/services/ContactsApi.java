@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import nz.co.roobics.contacts.models.Contact;
+import nz.co.roobics.contacts.contacts.models.Contact;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

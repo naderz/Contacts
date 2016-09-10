@@ -10,7 +10,7 @@ import android.widget.TextView;
 import javax.inject.Inject;
 
 import nz.co.roobics.contacts.R;
-import nz.co.roobics.contacts.models.Contact;
+import nz.co.roobics.contacts.contacts.models.Contact;
 
 public class DetailsFragment extends Fragment implements DetailsContract.View {
 

@@ -5,7 +5,7 @@ import java.util.List;
 import dagger.Module;
 import dagger.Provides;
 import nz.co.roobics.contacts.di.FragmentScoped;
-import nz.co.roobics.contacts.models.Contact;
+import nz.co.roobics.contacts.contacts.models.Contact;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;

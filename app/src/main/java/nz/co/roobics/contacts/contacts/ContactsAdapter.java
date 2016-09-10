@@ -12,7 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import nz.co.roobics.contacts.R;
-import nz.co.roobics.contacts.models.Contact;
+import nz.co.roobics.contacts.contacts.models.Contact;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
 

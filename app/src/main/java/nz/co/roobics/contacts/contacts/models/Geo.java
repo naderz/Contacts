@@ -1,5 +1,5 @@
 
-package nz.co.roobics.contacts.models;
+package nz.co.roobics.contacts.contacts.models;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -2,7 +2,7 @@ package nz.co.roobics.contacts.contacts.details;
 
 import javax.inject.Inject;
 
-import nz.co.roobics.contacts.models.Contact;
+import nz.co.roobics.contacts.contacts.models.Contact;
 
 public class DetailsPresenter implements DetailsContract.Presenter {
 

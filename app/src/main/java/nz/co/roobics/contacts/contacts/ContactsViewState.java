@@ -3,7 +3,7 @@ package nz.co.roobics.contacts.contacts;
 import java.util.ArrayList;
 
 import nz.co.roobics.contacts.ViewState;
-import nz.co.roobics.contacts.models.Contact;
+import nz.co.roobics.contacts.contacts.models.Contact;
 
 public class ContactsViewState extends ViewState {
 

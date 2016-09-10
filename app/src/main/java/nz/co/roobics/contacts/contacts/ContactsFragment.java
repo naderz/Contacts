@@ -21,7 +21,7 @@ import javax.inject.Inject;
 import nz.co.roobics.contacts.BaseApplication;
 import nz.co.roobics.contacts.R;
 import nz.co.roobics.contacts.contacts.details.DetailsActivity;
-import nz.co.roobics.contacts.models.Contact;
+import nz.co.roobics.contacts.contacts.models.Contact;
 
 public class ContactsFragment extends Fragment implements ContactsContract.View, ContactsAdapter.ListItemListener {
 
