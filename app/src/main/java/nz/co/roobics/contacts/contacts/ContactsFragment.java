@@ -144,7 +144,6 @@ public class ContactsFragment extends Fragment implements ContactsContract.View,
 
     @Override
     public void showNoContent() {
-        mContacts = new ArrayList<>();
         if (mAdapter.getItemCount() == 0) {
             mInfoTextView.setVisibility(View.VISIBLE);
             mInfoTextView.setText(getString(R.string.no_contacts));
